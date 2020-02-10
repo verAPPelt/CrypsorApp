@@ -36,7 +36,7 @@
             android:layout_height="100dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:src="@drawable/alpha_bank_icon" />
+            android:src="@drawable/krakerund" />
 
         <TextView
             android:layout_width="match_parent"
@@ -46,9 +46,9 @@
             android:layout_marginTop="136dp"
             android:textColor="#FFFFFF"
             android:textAlignment="center"
-            android:textSize="24dp"
-            android:fontFamily="@font/calibri"
-            android:text="Welcome to the new" />
+            android:textSize="30dp"
+            android:fontFamily="@font/aquawaxprodemiboldtrial"
+            android:text="Crypsor" />
 
         <TextView
             android:layout_width="match_parent"
@@ -60,7 +60,7 @@
             android:textAlignment="center"
             android:textSize="24dp"
             android:fontFamily="@font/calibri"
-            android:text="Alpha-bank" />
+            android:text="welcomes you warmly" />
 
         <ImageView
             android:layout_width="60dp"
@@ -71,7 +71,7 @@
             android:src="@drawable/finger_print_icon" />
 
         <Button
-            android:id="@+id/login"
+            android:id="@+id/start"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -80,7 +80,7 @@
             android:layout_marginBottom="88dp"
             android:background="@drawable/blackroundedbuttonshape"
             android:fontFamily="@font/calibri"
-            android:text="Login"
+            android:text="Start crypsis"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:textAllCaps="false"
@@ -88,7 +88,7 @@
             android:textSize="16sp" />
 
         <Button
-            android:id="@+id/become_a_client"
+            android:id="@+id/settings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -96,7 +96,7 @@
             android:layout_gravity="center"
             android:background="@drawable/whiteroundedbuttonshape"
             android:fontFamily="@font/calibri"
-            android:text="Become a client"
+            android:text="Settings"
             android:layout_marginBottom="24dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
