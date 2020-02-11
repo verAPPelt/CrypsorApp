@@ -26,7 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/calibri"
-                android:text="Get Keyphrases"
+                android:text="Search results"
                 android:textAlignment="center"
                 android:textColor="#000000"
                 android:textSize="18sp"
@@ -41,9 +41,7 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -69,7 +67,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="8dp"
                             android:fontFamily="@font/calibri"
-                            android:text="Remove word (group)"
+                            android:text="User query"
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
@@ -80,30 +78,28 @@
                             android:weightSum="100">
 
                             <TextView
+                                android:id="@+id/tvquery"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="8dp"
-                                android:layout_weight="85"
+                                android:layout_weight="75"
                                 android:background="@drawable/light_gray_rounded_border_shape"
                                 android:fontFamily="@font/calibri"
                                 android:padding="12dp"
-                                android:tooltipText="word(s) to remove"
+                                android:text="query"
                                 android:textColor="#000000"
                                 android:textSize="18sp"
                                 android:textStyle="bold" />
 
-                            <TextView
+                            <ImageView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="8dp"
-                                android:layout_weight="15"
                                 android:background="@drawable/pink_rounded_shape"
-                                android:drawableRight="@drawable/baseline_build_white_18dp"
-                                android:fontFamily="@font/calibri"
+                                android:src="@drawable/baseline_search_white_18dp_1x"
+                                android:layout_gravity="center"
                                 android:padding="12dp"
-                                android:textColor="#FFFFFF"
-                                android:textSize="18sp"
-                                android:textStyle="bold" />
+                                android:layout_weight="20"/>
 
                         </LinearLayout>
 
@@ -123,7 +119,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="50"
                         android:fontFamily="@font/calibri"
-                        android:text="At The Time"
+                        android:text="Search results"
                         android:textColor="#202022"
                         android:textSize="18sp" />
 
@@ -132,190 +128,590 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="50"
                         android:fontFamily="@font/calibri"
-                        android:text="Month"
+                        android:text="10"
                         android:textAlignment="textEnd"
                         android:textColor="#bdbdbd"
                         android:textSize="18sp" />
                 </LinearLayout>
 
-                <LinearLayout
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="260dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cv1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:orientation="horizontal"
-                    android:weightSum="100">
+                    android:layout_weight="20"
+                    app:cardCornerRadius="8dp"
+                    app:cardUseCompatPadding="true"
+                    app:contentPadding="16dp">
 
-                    <android.support.v7.widget.CardView
-                        android:id="@+id/nounphrase1"
-                        android:layout_width="0dp"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="50"
-                        app:cardBackgroundColor="@color/colorPrimary"
-                        app:cardCornerRadius="8dp"
-                        app:cardUseCompatPadding="true"
-                        app:contentPadding="16dp">
+                        android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv1title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/calibri"
+                        android:text="14.50%"
+                        android:textAlignment="center"
+                        android:textColor="#da2c73"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv1url"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/calibri"
+                        android:text="At the end"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tv1snippet"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="3"
+                        android:textAlignment="center"
+                        android:textSize="14sp"/>
+
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cv2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="20"
+                    app:cardCornerRadius="8dp"
+                    app:cardUseCompatPadding="true"
+                    app:contentPadding="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/tvnounphrase1"
-                            android:layout_width="wrap_content"
+                            android:id="@+id/tv2title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/calibri"
+                            android:text="14.50%"
+                            android:textAlignment="center"
+                            android:textColor="#da2c73"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv2url"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/calibri"
+                            android:text="At the end"
+                            android:textAlignment="center"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/tv2snippet"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="3"
-                            android:textColor="#FFFFFF"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
+                            android:textAlignment="center"
+                            android:textSize="14sp"/>
 
-                    </android.support.v7.widget.CardView>
+                    </LinearLayout>
 
-                    <android.support.v7.widget.CardView
-                        android:id="@+id/nounphrase2"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="50"
-                        app:cardBackgroundColor="@color/colorPrimary"
-                        app:cardCornerRadius="8dp"
-                        app:cardUseCompatPadding="true"
-                        app:contentPadding="16dp">
+                </android.support.v7.widget.CardView>
 
-                        <TextView
-                            android:id="@+id/tvnounphrase2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="6"
-                            android:textColor="#FFFFFF"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                    </android.support.v7.widget.CardView>
-
-                </LinearLayout>
-                <LinearLayout
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cv3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:orientation="horizontal"
-                    android:weightSum="100">
+                    android:layout_weight="20"
+                    app:cardCornerRadius="8dp"
+                    app:cardUseCompatPadding="true"
+                    app:contentPadding="16dp">
 
-                    <android.support.v7.widget.CardView
-                        android:id="@+id/nounphrase3"
-                        android:layout_width="0dp"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="50"
-                        app:cardBackgroundColor="@color/colorPrimary"
-                        app:cardCornerRadius="8dp"
-                        app:cardUseCompatPadding="true"
-                        app:contentPadding="16dp">
+                        android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/tvnounphrase3"
-                            android:layout_width="wrap_content"
+                            android:id="@+id/tv3title"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="12"
-                            android:textColor="#FFFFFF"
-                            android:textSize="16sp"
+                            android:fontFamily="@font/calibri"
+                            android:text="14.50%"
+                            android:textAlignment="center"
+                            android:textColor="#da2c73"
+                            android:textSize="18sp"
                             android:textStyle="bold" />
-
-                    </android.support.v7.widget.CardView>
-
-                    <android.support.v7.widget.CardView
-                        android:id="@+id/nounphrase4"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="50"
-                        app:cardBackgroundColor="@color/colorPrimary"
-                        app:cardCornerRadius="8dp"
-                        app:cardUseCompatPadding="true"
-                        app:contentPadding="16dp">
 
                         <TextView
-                            android:id="@+id/tvnounphrase4"
-                            android:layout_width="wrap_content"
+                            android:id="@+id/tv3url"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/calibri"
+                            android:text="At the end"
+                            android:textAlignment="center"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/tv3snippet"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="18"
-                            android:textColor="#FFFFFF"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
+                            android:text="3"
+                            android:textAlignment="center"
+                            android:textSize="14sp"/>
 
-                    </android.support.v7.widget.CardView>
+                    </LinearLayout>
 
-                </LinearLayout>
-                <LinearLayout
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cv4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:orientation="horizontal"
-                    android:weightSum="100">
+                    android:layout_weight="20"
+                    app:cardCornerRadius="8dp"
+                    app:cardUseCompatPadding="true"
+                    app:contentPadding="16dp">
 
-                    <android.support.v7.widget.CardView
-                        android:id="@+id/nounphrase5"
-                        android:layout_width="0dp"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="50"
-                        app:cardBackgroundColor="@color/colorPrimary"
-                        app:cardCornerRadius="8dp"
-                        app:cardUseCompatPadding="true"
-                        app:contentPadding="16dp">
+                        android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/tvnounphrase5"
-                            android:layout_width="wrap_content"
+                            android:id="@+id/tv4title"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="24"
-                            android:textColor="#FFFFFF"
-                            android:textSize="16sp"
+                            android:fontFamily="@font/calibri"
+                            android:text="14.50%"
+                            android:textAlignment="center"
+                            android:textColor="#da2c73"
+                            android:textSize="18sp"
                             android:textStyle="bold" />
-
-                    </android.support.v7.widget.CardView>
-                    <android.support.v7.widget.CardView
-                        android:id="@+id/nounphrase6"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="50"
-                        app:cardBackgroundColor="@color/colorPrimary"
-                        app:cardCornerRadius="8dp"
-                        app:cardUseCompatPadding="true"
-                        app:contentPadding="16dp">
 
                         <TextView
-                            android:id="@+id/tvnounphrase6"
-                            android:layout_width="wrap_content"
+                            android:id="@+id/tv4url"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/calibri"
+                            android:text="At the end"
+                            android:textAlignment="center"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/tv4snippet"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="24"
-                            android:textColor="#FFFFFF"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
+                            android:text="3"
+                            android:textAlignment="center"
+                            android:textSize="14sp"/>
 
-                    </android.support.v7.widget.CardView>
+                    </LinearLayout>
 
-                </LinearLayout>
+                </android.support.v7.widget.CardView>
 
-
-
-
-
-                <Button
-                    android:id="@+id/calculate"
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cv5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginRight="16dp"
-                    android:background="@drawable/blackroundedbuttonshape"
-                    android:fontFamily="@font/calibri"
-                    android:text="Confirm"
-                    android:textAllCaps="false"
-                    android:textColor="#ffffff"
-                    android:textSize="16sp" />
+                    android:layout_weight="20"
+                    app:cardCornerRadius="8dp"
+                    app:cardUseCompatPadding="true"
+                    app:contentPadding="16dp">
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv5title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/calibri"
+                            android:text="14.50%"
+                            android:textAlignment="center"
+                            android:textColor="#da2c73"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv5url"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/calibri"
+                            android:text="At the end"
+                            android:textAlignment="center"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/tv5snippet"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="3"
+                            android:textAlignment="center"
+                            android:textSize="14sp"/>
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cv6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="20"
+                    app:cardCornerRadius="8dp"
+                    app:cardUseCompatPadding="true"
+                    app:contentPadding="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv6title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/calibri"
+                            android:text="14.50%"
+                            android:textAlignment="center"
+                            android:textColor="#da2c73"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv6url"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/calibri"
+                            android:text="At the end"
+                            android:textAlignment="center"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/tv6snippet"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="3"
+                            android:textAlignment="center"
+                            android:textSize="14sp"/>
+
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cv7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="20"
+                    app:cardCornerRadius="8dp"
+                    app:cardUseCompatPadding="true"
+                    app:contentPadding="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv7title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/calibri"
+                            android:text="14.50%"
+                            android:textAlignment="center"
+                            android:textColor="#da2c73"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv7url"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/calibri"
+                            android:text="At the end"
+                            android:textAlignment="center"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/tv7snippet"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="3"
+                            android:textAlignment="center"
+                            android:textSize="14sp"/>
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cv8"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="20"
+                    app:cardCornerRadius="8dp"
+                    app:cardUseCompatPadding="true"
+                    app:contentPadding="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv8title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/calibri"
+                            android:text="14.50%"
+                            android:textAlignment="center"
+                            android:textColor="#da2c73"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv8url"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/calibri"
+                            android:text="At the end"
+                            android:textAlignment="center"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/tv8snippet"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="3"
+                            android:textAlignment="center"
+                            android:textSize="14sp"/>
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cv9"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="20"
+                    app:cardCornerRadius="8dp"
+                    app:cardUseCompatPadding="true"
+                    app:contentPadding="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv9title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/calibri"
+                            android:text="14.50%"
+                            android:textAlignment="center"
+                            android:textColor="#da2c73"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv9url"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/calibri"
+                            android:text="At the end"
+                            android:textAlignment="center"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/tv9snippet"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="3"
+                            android:textAlignment="center"
+                            android:textSize="14sp"/>
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cv10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="20"
+                    app:cardCornerRadius="8dp"
+                    app:cardUseCompatPadding="true"
+                    app:contentPadding="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv10title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/calibri"
+                            android:text="14.50%"
+                            android:textAlignment="center"
+                            android:textColor="#da2c73"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv10url"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/calibri"
+                            android:text="At the end"
+                            android:textAlignment="center"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/tv10snippet"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="3"
+                            android:textAlignment="center"
+                            android:textSize="14sp"/>
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
 
             </LinearLayout>
-
         </ScrollView>
+
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="0"
+                    android:fontFamily="@font/calibri"
+                    android:text="Rate your result"
+                    android:textColor="#202022"
+                    android:textSize="18sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="24dp"
+                    android:orientation="horizontal"
+                    android:weightSum="100">
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="8dp"
+                        android:layout_weight="33"
+                        app:cardBackgroundColor="@color/colorPrimary"
+                        app:cardCornerRadius="8dp"
+                        app:cardUseCompatPadding="true"
+                        app:contentPadding="16dp">
+
+
+                            <ImageView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/baseline_sentiment_very_satisfied_white_18dp_2x"
+                                android:layout_marginTop="6dp"
+                                android:layout_marginBottom="6dp" />
+
+
+
+                    </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="8dp"
+                        android:layout_weight="33"
+                        app:cardCornerRadius="8dp"
+                        app:cardUseCompatPadding="true"
+                        app:contentPadding="16dp">
+
+
+                            <ImageView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/baseline_sentiment_satisfied_black_18dp_2x"
+                                android:layout_marginTop="6dp"
+                                android:layout_marginBottom="6dp" />
+
+                    </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="33"
+                        app:cardBackgroundColor="@color/cardview_dark_background"
+                        app:cardCornerRadius="8dp"
+                        app:cardUseCompatPadding="true"
+                        app:contentPadding="16dp">
+
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/baseline_sentiment_very_dissatisfied_white_18dp_2x"
+                            android:layout_marginTop="6dp"
+                            android:layout_marginBottom="6dp" />
+
+
+                    </android.support.v7.widget.CardView>
+                </LinearLayout>
+
+            </LinearLayout>
 
     </RelativeLayout>
 

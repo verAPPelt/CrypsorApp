@@ -32,6 +32,7 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <ImageView
+            android:id="@+id/crypsorButton"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_alignParentTop="true"

@@ -1,30 +1,26 @@
 package com.shashank.platform.alphabankui;
 
-import android.graphics.Color;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.TextView;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
 public class SearchResultsActivity extends AppCompatActivity implements View.OnClickListener {
+    TextView tvQuery;
+    TextView[] tvTitle, tvURL, tvSnippet;
+    CardView[] cvResult;
 
+    String query;
 
-    CardView cardView1, cardView2, cardView3, cardView4, cardView5, cardView6;
-    TextView tv1, tv2, tv3, tv4, tv5, tv6;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_searchresults);
-
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_gray_24dp);
@@ -35,87 +31,101 @@ public class SearchResultsActivity extends AppCompatActivity implements View.OnC
             }
         });
 
-        String keyphrases = "";
-        if(getIntent().hasExtra("query") == true) {
-            String query = getIntent().getExtras().getString("query");
-            keyphrases = getEntireWebpage(query, "20");
-            System.out.println(keyphrases);
+        if (getIntent().hasExtra("query") == true) {
+            query = getIntent().getExtras().getString("query");
+            //String[] nounphrases = getIntent().getExtras().getStringArray("nounphrases");
+            //nounphrases = new WebOperations().getEntireWebpage(query, "20", "find-nounphrases").split(", "); //TODO split an was?
+
         }
 
-        tv1 = (TextView) findViewById(R.id.tvnounphrase1);
-        tv1.setText(keyphrases);
-        tv2 = (TextView) findViewById(R.id.tvnounphrase2);
-        tv3 = (TextView) findViewById(R.id.tvnounphrase3);
-        tv4 = (TextView) findViewById(R.id.tvnounphrase4);
-        tv5 = (TextView) findViewById(R.id.tvnounphrase5);
-        tv6 = (TextView) findViewById(R.id.tvnounphrase6);
-
-        cardView1 = (CardView) findViewById(R.id.nounphrase1);
-        cardView1.setCardBackgroundColor(Color.GREEN);
-        cardView2 = (CardView) findViewById(R.id.nounphrase2);
-        cardView3 = (CardView) findViewById(R.id.nounphrase3);
-        cardView4 = (CardView) findViewById(R.id.nounphrase4);
-        cardView5 = (CardView) findViewById(R.id.nounphrase5);
-        cardView6 = (CardView) findViewById(R.id.nounphrase6);
-        cardView1.setClickable(true);
-        cardView1.setOnClickListener(this);
+        tvQuery = (TextView) findViewById(R.id.tvquery);
+        tvQuery.setText(query);
 
 
-
-
-
+        tvTitle = new TextView[10];
+        tvURL = new TextView[10];
+        tvSnippet = new TextView[10];
+        cvResult = new CardView[10];
+        instantiate();
 
     }
-    public void onClick(View view){
-        switch(view.getId()){
-            case R.id.nounphrase1:
-                //Toast.makeText(this, "Don't worry about a frozen or black screen for some seconds :)", Toast.LENGTH_SHORT).show();
-                if(cardView1.getCardBackgroundColor().equals(Color.WHITE)){
-                    cardView1.setCardBackgroundColor(Color.RED);
-                }else{
-                    cardView1.setCardBackgroundColor(Color.WHITE);
-                    tv1.setTextColor(Color.BLACK);
-                }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.cv1:
+                Intent intent = new Intent(getApplicationContext(), WebviewActivity.class);
+                intent.putExtra("url", "https://wikipedia.de/");
+                //intent.putExtra("nounphrases", usedNounphrases);
+                startActivity(intent);
                 break;
-
-
+            case R.id.cv2:
+                break;
+            case R.id.cv3:
+                break;
+            case R.id.cv4:
+                break;
+            case R.id.cv5:
+                break;
+            case R.id.cv6:
+                break;
+            case R.id.cv7:
+                break;
+            case R.id.cv8:
+                break;
+            case R.id.cv9:
+                break;
+            case R.id.cv10:
+                break;
         }
     }
 
-    public String getEntireWebpage(String query, String size) {
-        URL url;
-        try {
-            url = new URL("http://localhost:8080/find-nounphrases?query="+query+",size="+size);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
-            int responseCode = connection.getResponseCode();
-            if(responseCode == 200) {
-                //System.out.println("Connecting succesfull (" + responseCode + ")");
 
-                //connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1500.29 Safari/537.36");
-                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
-                String inputLine;
-                StringBuffer response = new StringBuffer();
-
-                long time1 = System.currentTimeMillis();
-                while ((inputLine = in.readLine()) != null) {
-                    long time2 = System.currentTimeMillis();
-                    if((time2-time1)/1000>=20) {
-                        break;
-                    }
-                    response.append(inputLine);
-                }
-                connection.disconnect();
-                //String textForFile = response.toString().replaceAll("\\<.*?\\>", "").trim();
-                return response.toString();
-            }else {
-                System.out.println("Connection failed (" + responseCode + ")");
-                return null;
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-            return null;
+    private void instantiate(){
+        tvTitle[0] = (TextView) findViewById(R.id.tv1title);
+        tvTitle[1] = (TextView) findViewById(R.id.tv2title);
+        tvTitle[2] = (TextView) findViewById(R.id.tv3title);
+        tvTitle[3] = (TextView) findViewById(R.id.tv4title);
+        tvTitle[4] = (TextView) findViewById(R.id.tv5title);
+        tvTitle[5] = (TextView) findViewById(R.id.tv6title);
+        tvTitle[6] = (TextView) findViewById(R.id.tv7title);
+        tvTitle[7] = (TextView) findViewById(R.id.tv8title);
+        tvTitle[8] = (TextView) findViewById(R.id.tv9title);
+        tvTitle[9] = (TextView) findViewById(R.id.tv10title);
+        tvURL[0] = (TextView) findViewById(R.id.tv1url);
+        tvURL[1] = (TextView) findViewById(R.id.tv2url);
+        tvURL[2] = (TextView) findViewById(R.id.tv3url);
+        tvURL[3] = (TextView) findViewById(R.id.tv4url);
+        tvURL[4] = (TextView) findViewById(R.id.tv5url);
+        tvURL[5] = (TextView) findViewById(R.id.tv6url);
+        tvURL[6] = (TextView) findViewById(R.id.tv7url);
+        tvURL[7] = (TextView) findViewById(R.id.tv8url);
+        tvURL[8] = (TextView) findViewById(R.id.tv9url);
+        tvURL[9] = (TextView) findViewById(R.id.tv10url);
+        tvSnippet[0] = (TextView) findViewById(R.id.tv1snippet);
+        tvSnippet[1] = (TextView) findViewById(R.id.tv2snippet);
+        tvSnippet[2] = (TextView) findViewById(R.id.tv3snippet);
+        tvSnippet[3] = (TextView) findViewById(R.id.tv4snippet);
+        tvSnippet[4] = (TextView) findViewById(R.id.tv5snippet);
+        tvSnippet[5] = (TextView) findViewById(R.id.tv6snippet);
+        tvSnippet[6] = (TextView) findViewById(R.id.tv7snippet);
+        tvSnippet[7] = (TextView) findViewById(R.id.tv8snippet);
+        tvSnippet[8] = (TextView) findViewById(R.id.tv9snippet);
+        tvSnippet[9] = (TextView) findViewById(R.id.tv10snippet);
+        cvResult[0] = (CardView) findViewById(R.id.cv1);
+        cvResult[1] = (CardView) findViewById(R.id.cv2);
+        cvResult[2] = (CardView) findViewById(R.id.cv3);
+        cvResult[3] = (CardView) findViewById(R.id.cv4);
+        cvResult[4] = (CardView) findViewById(R.id.cv5);
+        cvResult[5] = (CardView) findViewById(R.id.cv6);
+        cvResult[6] = (CardView) findViewById(R.id.cv7);
+        cvResult[7] = (CardView) findViewById(R.id.cv8);
+        cvResult[8] = (CardView) findViewById(R.id.cv9);
+        cvResult[9] = (CardView) findViewById(R.id.cv10);
+        for(int i = 0; i < cvResult.length; i++){
+            cvResult[i].setOnClickListener(this);
         }
     }
 }
