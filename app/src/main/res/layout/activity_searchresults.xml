@@ -77,7 +77,7 @@
                             android:orientation="horizontal"
                             android:weightSum="100">
 
-                            <TextView
+                            <EditText
                                 android:id="@+id/tvquery"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
@@ -92,6 +92,7 @@
                                 android:textStyle="bold" />
 
                             <ImageView
+                                android:id="@+id/btnNounphrases"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="8dp"

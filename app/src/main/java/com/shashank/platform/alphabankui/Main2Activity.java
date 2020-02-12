@@ -20,6 +20,10 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
 
         etQuery = (EditText) findViewById(R.id.queryField);
         etQuery.setOnKeyListener(this);
+        if(getIntent().hasExtra("query") == true) {
+            String query = getIntent().getExtras().getString("query");
+            etQuery.setText(query);
+        }
         Button btnStart = (Button) findViewById(R.id.search);
         btnStart.setOnClickListener(this);
 
@@ -46,7 +50,10 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
     private void nextActivity(){
         String q = etQuery.getText()+"";
         System.out.println(q);
-        Intent intent = new Intent(getApplicationContext(), ChooseNounphrasesActivity.class);
+        /*Intent intent = new Intent(getApplicationContext(), ChooseNounphrasesActivity.class);
+        intent.putExtra("query", q);
+        startActivity(intent);*/
+        Intent intent = new Intent(getApplicationContext(), ProgressBarActivity.class);
         intent.putExtra("query", q);
         startActivity(intent);
     }

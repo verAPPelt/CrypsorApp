@@ -7,12 +7,15 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.webkit.WebView;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class SearchResultsActivity extends AppCompatActivity implements View.OnClickListener {
-    TextView tvQuery;
+    EditText tvQuery;
     TextView[] tvTitle, tvURL, tvSnippet;
     CardView[] cvResult;
+    ImageView btnNounphrases;
 
     String query;
 
@@ -38,8 +41,10 @@ public class SearchResultsActivity extends AppCompatActivity implements View.OnC
 
         }
 
-        tvQuery = (TextView) findViewById(R.id.tvquery);
+        tvQuery = (EditText) findViewById(R.id.tvquery);
         tvQuery.setText(query);
+        btnNounphrases = (ImageView)findViewById(R.id.btnNounphrases);
+        btnNounphrases.setOnClickListener(this);
 
 
         tvTitle = new TextView[10];
@@ -76,6 +81,13 @@ public class SearchResultsActivity extends AppCompatActivity implements View.OnC
             case R.id.cv9:
                 break;
             case R.id.cv10:
+                break;
+            case R.id.btnNounphrases:
+                String q = tvQuery.getText()+"";
+                System.out.println(q);
+                Intent intent2 = new Intent(getApplicationContext(), ChooseNounphrasesActivity.class);
+                intent2.putExtra("query", q);
+                startActivity(intent2);
                 break;
         }
     }
