@@ -11,6 +11,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.util.List;
+import java.util.Map;
+
 public class SearchResultsActivity extends AppCompatActivity implements View.OnClickListener {
     EditText tvQuery;
     TextView[] tvTitle, tvURL, tvSnippet;
@@ -18,6 +24,7 @@ public class SearchResultsActivity extends AppCompatActivity implements View.OnC
     ImageView btnNounphrases;
 
     String query;
+    String[] results;
 
 
     @Override
@@ -34,8 +41,17 @@ public class SearchResultsActivity extends AppCompatActivity implements View.OnC
             }
         });
 
-        if (getIntent().hasExtra("query") == true) {
+        if (getIntent().hasExtra("query") == true && getIntent().hasExtra("results") == true) {
             query = getIntent().getExtras().getString("query");
+            String resultsString = getIntent().getExtras().getString("results");
+
+            try {
+                Map nounphrasesMap = new ObjectMapper().readValue(resultsString, Map.class);
+                List<String> list = (List) nounphrasesMap.get("search results");
+                results = list.toArray(new String[list.size()]);
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+            }
             //String[] nounphrases = getIntent().getExtras().getStringArray("nounphrases");
             //nounphrases = new WebOperations().getEntireWebpage(query, "20", "find-nounphrases").split(", "); //TODO split an was?
 
@@ -49,6 +65,11 @@ public class SearchResultsActivity extends AppCompatActivity implements View.OnC
 
         tvTitle = new TextView[10];
         tvURL = new TextView[10];
+        for(int i = 0; i < results.length; i++){
+            if(i < tvURL.length){
+                tvURL[i].setText(results[i]);
+            }
+        }
         tvSnippet = new TextView[10];
         cvResult = new CardView[10];
         instantiate();
@@ -59,28 +80,34 @@ public class SearchResultsActivity extends AppCompatActivity implements View.OnC
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.cv1:
-                Intent intent = new Intent(getApplicationContext(), WebviewActivity.class);
-                intent.putExtra("url", "https://wikipedia.de/");
-                //intent.putExtra("nounphrases", usedNounphrases);
-                startActivity(intent);
+                openWebview(results[0]);
                 break;
             case R.id.cv2:
+                openWebview(results[1]);
                 break;
             case R.id.cv3:
+                openWebview(results[2]);
                 break;
             case R.id.cv4:
+                openWebview(results[3]);
                 break;
             case R.id.cv5:
+                openWebview(results[4]);
                 break;
             case R.id.cv6:
+                openWebview(results[5]);
                 break;
             case R.id.cv7:
+                openWebview(results[6]);
                 break;
             case R.id.cv8:
+                openWebview(results[7]);
                 break;
             case R.id.cv9:
+                openWebview(results[8]);
                 break;
             case R.id.cv10:
+                openWebview(results[9]);
                 break;
             case R.id.btnNounphrases:
                 String q = tvQuery.getText()+"";
@@ -93,6 +120,11 @@ public class SearchResultsActivity extends AppCompatActivity implements View.OnC
     }
 
 
+    private void openWebview(String url){
+        Intent intent = new Intent(getApplicationContext(), WebviewActivity.class);
+        intent.putExtra("url", url);
+        startActivity(intent);
+    }
 
 
     private void instantiate(){

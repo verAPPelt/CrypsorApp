@@ -10,7 +10,12 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class ProgressBarActivityGetSearchResults extends AppCompatActivity {
     private ProgressBar progressBar;
@@ -19,7 +24,7 @@ public class ProgressBarActivityGetSearchResults extends AppCompatActivity {
     private android.widget.ImageView ImageView;
     private Handler handler = new Handler();
     private String query;
-    List<String> keyqueryCover;
+    String[] keyqueryCover;
     TextView tvTodo;
 
     @Override
@@ -36,19 +41,29 @@ public class ProgressBarActivityGetSearchResults extends AppCompatActivity {
             }
         });
 
-        if(getIntent().hasExtra("query") == true) {
+        if(getIntent().hasExtra("query") == true && getIntent().hasExtra("keyqueries") == true) {
             this.query = getIntent().getExtras().getString("query");
-            this.keyqueryCover = getIntent().getExtras().getStringArrayList("keyqueries");
+            String keyqueries = getIntent().getExtras().getString("keyqueries");
+            try {
+                Map keyqueriesMap = new ObjectMapper().readValue(keyqueries, Map.class);
+                List<String> list = (List) keyqueriesMap.get("keyqueries");
+                keyqueryCover = list.toArray(new String[list.size()]);
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+            }
         }
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         ImageView imageView = (ImageView) findViewById(R.id.imageView);
         pb = new MyProgressBar(this);
 
-
+        String keyqueriesParameter = "";
+        for(String s : keyqueryCover){
+            keyqueriesParameter += "&keyqueries="+s;
+        }
         tvTodo = (TextView) findViewById(R.id.tvTodo);
-        tvTodo.setText("Receiving keyqueries");
-        new WebOperations(this).getKeyqueries(query,nounphrasesParameter);
+        tvTodo.setText("Receiving search results");
+        new WebOperations(this).getSearchResults(query,keyqueriesParameter);
 
         //Long operation by thread
         new Thread(new Runnable() {

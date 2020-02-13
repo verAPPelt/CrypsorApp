@@ -36,7 +36,7 @@ public class ProgressBarActivityGetKeyqueries extends AppCompatActivity {
             }
         });
 
-        if(getIntent().hasExtra("query") == true) {
+        if(getIntent().hasExtra("query") == true && getIntent().hasExtra("nounphrases") == true) {
             this.query = getIntent().getExtras().getString("query");
             this.usedNounphrases = getIntent().getExtras().getStringArrayList("nounphrases");
         }

@@ -152,7 +152,7 @@ public class WebOperations {
         public void run() {
             try {
                 String returnString = getEntireWebpage();
-                Intent intent = new Intent(applicationContext, ProgressBarActivityGetKeyqueries.class);
+                Intent intent = new Intent(applicationContext, ProgressBarActivityGetSearchResults.class);
                 intent.putExtra("query", query);
                 intent.putExtra("keyqueries", returnString);
                 activity.startActivity(intent);
@@ -167,7 +167,7 @@ public class WebOperations {
         public void run() {
             try {
                 String returnString = getEntireWebpage();
-                Intent intent = new Intent(applicationContext, ProgressBarActivityGetSearchResults.class);
+                Intent intent = new Intent(applicationContext, SearchResultsActivity.class);
                 intent.putExtra("query", query);
                 intent.putExtra("results", returnString);
                 activity.startActivity(intent);

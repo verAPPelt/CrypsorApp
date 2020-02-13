@@ -160,11 +160,10 @@ public class ChooseNounphrasesActivity extends AppCompatActivity implements View
                 if(button.getText().equals("Confirm")){
                     ArrayList<String> usedNounphrases = new ArrayList<String>();
                     for(int i = 0; i < nounphrases.length; i++){
-                        if(userChoice[i] == true){
+                        if(userChoice[i]){
                             usedNounphrases.add(nounphrases[i]);
                         }
                     }
-                    //Intent intent = new Intent(getApplicationContext(), ChooseKeyqueriesActivity.class);
                     Intent intentResults = new Intent(getApplicationContext(), ProgressBarActivityGetKeyqueries.class);
                     intentResults.putExtra("query", query);
                     intentResults.putStringArrayListExtra("nounphrases", usedNounphrases);
