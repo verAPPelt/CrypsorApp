@@ -6,6 +6,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -15,6 +19,7 @@ public class WebOperations {
     private final Activity activity;
     private String task;
     private String query;
+    private String filename;
 
 
     public WebOperations(Activity activity) {
@@ -23,6 +28,7 @@ public class WebOperations {
     }
 
     public String getEntireWebpage() {
+        //TODO Use JSoup
         URL url;
         try {
             url = new URL("http://" + getServerAddress() + "/" + task);
@@ -30,10 +36,7 @@ public class WebOperations {
 
             int responseCode = connection.getResponseCode();
             if (responseCode == 200) {
-                //System.out.println("Connecting succesfull (" + responseCode + ")");
-
-                //connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1500.29 Safari/537.36");
-                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+               BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
                 String inputLine;
                 StringBuffer response = new StringBuffer();
@@ -47,7 +50,6 @@ public class WebOperations {
                     response.append(inputLine);
                 }
                 connection.disconnect();
-                //String textForFile = response.toString().replaceAll("\\<.*?\\>", "").trim();
                 return response.toString();
             } else {
                 System.out.println("Connection failed (" + responseCode + ")");
@@ -67,34 +69,21 @@ public class WebOperations {
     public void getNounphrases(String query){
         this.query = query;
         this.task = "find-nounphrases?query="+query;
+        this.filename = this.task + ".txt";
         new Thread(new getWebpageRunnable()).start();
-
-        /*final CountDownLatch latch = new CountDownLatch(1);
-        final String[] returnString = new String[1];
-        Thread uiThread = new HandlerThread("UIHandler"){
-            @Override
-            public void run(){
-                returnString[0] = getEntireWebpage();
-                latch.countDown(); // Release await() in the test thread.
-            }
-        };
-        uiThread.start();
-        try {
-            latch.await();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        returnString[0]editNounphraseString(returnString[0]);
-        */
     }
+
     public void getKeyqueries(String query, String nounphrases){
         this.query = query;
         this.task = "find-keyqueries?query="+query+nounphrases;
+        this.filename = "find-keyqueries?query="+query + ".txt";
         new Thread(new getKeyqueriesRunnable()).start();
     }
+
     public void getSearchResults(String query, String keyqueries){
         this.query = query;
         this.task = "search?query="+query+keyqueries;
+        this.filename = "search?query="+query + ".txt";
         new Thread(new getSearchResultsRunnable()).start();
     }
 
@@ -114,6 +103,84 @@ public class WebOperations {
         return address;
     }
 
+
+
+    private boolean exists (String filename){
+        File file = new File(applicationContext.getFilesDir(), this.filename);
+        if(file.exists()){
+            return true;
+        }
+        return false;
+        /*File directory = applicationContext.getDir(filename, Context.MODE_PRIVATE);
+        for(File file : directory.listFiles()){
+            String name = file.getName().toString();
+            if(name.equals(filename)){
+                return true;
+            }
+        }
+        return false;*/
+    }
+    private String readData(String filename)
+    {
+        try
+        {
+            FileInputStream fin = applicationContext.openFileInput(this.filename);
+            int a;
+            StringBuilder temp = new StringBuilder();
+            while ((a = fin.read()) != -1)
+            {
+                temp.append((char)a);
+            }
+            fin.close();
+            return temp.toString();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+
+    private void writeData(String data) {
+        //TODO query free space: https://developer.android.com/training/data-storage/app-specific#query-free-space
+        try {
+            FileOutputStream fos = applicationContext.openFileOutput(filename, Context.MODE_PRIVATE);
+            fos.write(data.getBytes());
+            fos.flush();
+            fos.close();
+            System.out.println("Data written.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private String getFilename(){
+        return this.filename;
+    }
+
+
+    private String getReturnString(){
+        String filename = getFilename();
+        System.out.println(filename);
+        String returnString;
+        if(exists(filename)){
+            returnString = readData(filename);
+            try {
+                Thread.sleep(10000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println("File exists and is read");
+        }else{
+            returnString = getEntireWebpage();
+            writeData(returnString);
+            System.out.println("File does not exist.");
+        }
+        return returnString;
+    }
+
+    //Runnables
 
     class checkConnectionRunnable implements Runnable {
 
@@ -152,17 +219,27 @@ public class WebOperations {
 
         @Override
         public void run() {
+            /*String filename = getFilename();
+            String returnString;
             try {
-                String returnString = getEntireWebpage();
-                //returnString = editNounphraseString(returnString);
+                if(exists(filename)){
+                    returnString = readData(filename);
+                    System.out.println("File exists and is read");
+                    //Thread.sleep(10000);
+                }else{
+                    System.out.println("File does not exist.");
+                    returnString = getEntireWebpage();
+                    writeData(returnString);
+                }*/
+                String returnString = getReturnString();
                 Intent intent = new Intent(applicationContext, ChooseNounphrasesActivity.class);
                 intent.putExtra("query", query);
                 intent.putExtra("nounphrases", returnString);
                 activity.startActivity(intent);
                 activity.finish();
-            } catch (Exception e) {
+            /*} catch (Exception e) {
                 System.out.println(e);
-            }
+            }*/
         }
     }
 
@@ -171,7 +248,15 @@ public class WebOperations {
         @Override
         public void run() {
             try {
-                String returnString = getEntireWebpage();
+                /*if(exists(filename)){
+                    returnString = readData(filename);
+                    System.out.println("File exists and is read");
+                }else{
+                    returnString = getEntireWebpage();
+                    writeData(returnString);
+                    System.out.println("File does not exist.");
+                }*/
+                String returnString = getReturnString();
                 Intent intent = new Intent(applicationContext, ProgressBarActivityGetSearchResults.class);
                 intent.putExtra("query", query);
                 intent.putExtra("keyqueries", returnString);
@@ -187,7 +272,8 @@ public class WebOperations {
         @Override
         public void run() {
             try {
-                String returnString = getEntireWebpage();
+                String returnString = getReturnString();
+                //String returnString = getEntireWebpage();
                 Intent intent = new Intent(applicationContext, SearchResultsActivity.class);
                 intent.putExtra("query", query);
                 intent.putExtra("results", returnString);
@@ -198,6 +284,4 @@ public class WebOperations {
             }
         }
     }
-
-
 }

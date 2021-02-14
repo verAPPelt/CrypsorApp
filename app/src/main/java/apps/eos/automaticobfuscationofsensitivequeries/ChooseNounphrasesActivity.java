@@ -63,7 +63,7 @@ public class ChooseNounphrasesActivity extends AppCompatActivity implements View
             }
 
 
-            userChoice = new boolean[nounphrases.length];   //TODO Achtung wenn doppelt so viele Nominalphrasen
+            userChoice = new boolean[nounphrases.length*2];   //TODO Achtung wenn doppelt so viele Nominalphrasen
             for(int i = 0; i < userChoice.length; i++){
                 userChoice[i] = true;
             }

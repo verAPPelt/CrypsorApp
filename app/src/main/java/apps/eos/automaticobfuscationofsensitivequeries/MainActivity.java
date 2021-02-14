@@ -38,6 +38,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         crypsorButton.setOnClickListener(this);
 
         ivServer = (ImageView) findViewById(R.id.ivServerConnection);
+        ivServer.setClickable(true);
+        ivServer.setOnClickListener(this);
 
         if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.INTERNET) == PackageManager.PERMISSION_GRANTED) {
             System.out.println("Internet erlaubt");
@@ -46,6 +48,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.INTERNET}, PERMISSION_INTERNET_REQUEST);
         }
 
+        updateConnectionStatus();
+        //new Thread(new checkConnectionRunnable()).start();
+
+    }
+
+    private void updateConnectionStatus(){
+        //FIXME does not work if connection interrupted
         String connected = "false";
         if(getIntent().hasExtra("connectionStatus") == true) {
             connected = getIntent().getExtras().getString("connectionStatus");
@@ -58,8 +67,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             ivServer.setImageResource(R.drawable.wifinotconnectednorder);
             Toast.makeText(this, "Not connected. Please control server settings", Toast.LENGTH_LONG).show();
         }
-        //new Thread(new checkConnectionRunnable()).start();
-
     }
 
     @Override
@@ -77,6 +84,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.crypsorButton:    //TODO pagehunt
                 Intent intentPageHunt = new Intent(getApplicationContext(),Main2Activity.class);
                 startActivity(intentPageHunt);
+                break;
+            case R.id.ivServerConnection:
+                updateConnectionStatus();
+                //new WebOperations(this).checkConnection();
                 break;
         }
     }

@@ -44,13 +44,14 @@ public class SearchResultsActivity extends AppCompatActivity implements View.OnC
         if (getIntent().hasExtra("query") == true && getIntent().hasExtra("results") == true) {
             query = getIntent().getExtras().getString("query");
             String resultsString = getIntent().getExtras().getString("results");
-
+            //System.out.println("RESULTS: " + resultsString);
             try {
                 Map nounphrasesMap = new ObjectMapper().readValue(resultsString, Map.class);
                 List<String> list = (List) nounphrasesMap.get("searchResults");
                 List<String> listTitles = (List) nounphrasesMap.get("titles");
                 List<String> listSnippets = (List) nounphrasesMap.get("snippets");
                 results = list.toArray(new String[list.size()]);
+                //System.out.println("Result size: "+ list.size());
                 titles = listTitles.toArray(new String[listTitles.size()]);
                 snippets = listSnippets.toArray(new String[listSnippets.size()]);
             } catch (JsonProcessingException e) {

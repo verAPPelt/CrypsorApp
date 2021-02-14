@@ -59,6 +59,7 @@ public class ProgressBarActivity extends AppCompatActivity {
                     try {
                         // Sleep for 300 milliseconds.
                         //Just to display the progress slowly
+                        System.out.println("Wait");
                         Thread.sleep(300);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
