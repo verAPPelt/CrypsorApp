@@ -111,14 +111,6 @@ public class WebOperations {
             return true;
         }
         return false;
-        /*File directory = applicationContext.getDir(filename, Context.MODE_PRIVATE);
-        for(File file : directory.listFiles()){
-            String name = file.getName().toString();
-            if(name.equals(filename)){
-                return true;
-            }
-        }
-        return false;*/
     }
     private String readData(String filename)
     {
@@ -149,7 +141,7 @@ public class WebOperations {
             fos.write(data.getBytes());
             fos.flush();
             fos.close();
-            System.out.println("Data written.");
+            //System.out.println("Data written.");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -162,20 +154,20 @@ public class WebOperations {
 
     private String getReturnString(){
         String filename = getFilename();
-        System.out.println(filename);
+        //System.out.println(filename);
         String returnString;
         if(exists(filename)){
             returnString = readData(filename);
             try {
-                Thread.sleep(10000);
+                Thread.sleep(20000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            System.out.println("File exists and is read");
+            //System.out.println("File exists and is read");
         }else{
             returnString = getEntireWebpage();
             writeData(returnString);
-            System.out.println("File does not exist.");
+            //System.out.println("File does not exist.");
         }
         return returnString;
     }
@@ -219,27 +211,13 @@ public class WebOperations {
 
         @Override
         public void run() {
-            /*String filename = getFilename();
-            String returnString;
-            try {
-                if(exists(filename)){
-                    returnString = readData(filename);
-                    System.out.println("File exists and is read");
-                    //Thread.sleep(10000);
-                }else{
-                    System.out.println("File does not exist.");
-                    returnString = getEntireWebpage();
-                    writeData(returnString);
-                }*/
-                String returnString = getReturnString();
-                Intent intent = new Intent(applicationContext, ChooseNounphrasesActivity.class);
-                intent.putExtra("query", query);
-                intent.putExtra("nounphrases", returnString);
-                activity.startActivity(intent);
-                activity.finish();
-            /*} catch (Exception e) {
-                System.out.println(e);
-            }*/
+            String returnString = getReturnString();
+            Intent intent = new Intent(applicationContext, ChooseNounphrasesActivity.class);
+            intent.putExtra("query", query);
+            intent.putExtra("nounphrases", returnString);
+            activity.startActivity(intent);
+            activity.finish();
+
         }
     }
 
@@ -248,14 +226,6 @@ public class WebOperations {
         @Override
         public void run() {
             try {
-                /*if(exists(filename)){
-                    returnString = readData(filename);
-                    System.out.println("File exists and is read");
-                }else{
-                    returnString = getEntireWebpage();
-                    writeData(returnString);
-                    System.out.println("File does not exist.");
-                }*/
                 String returnString = getReturnString();
                 Intent intent = new Intent(applicationContext, ProgressBarActivityGetSearchResults.class);
                 intent.putExtra("query", query);
@@ -273,7 +243,6 @@ public class WebOperations {
         public void run() {
             try {
                 String returnString = getReturnString();
-                //String returnString = getEntireWebpage();
                 Intent intent = new Intent(applicationContext, SearchResultsActivity.class);
                 intent.putExtra("query", query);
                 intent.putExtra("results", returnString);
